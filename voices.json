@@ -1,0 +1,26 @@
+{
+    "en": {
+        "female": {
+            "name": "en_US-lessac-medium",
+            "url": "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/en/en_US/lessac/medium/en_US-lessac-medium.onnx",
+            "speaker_id": null
+        },
+        "male": {
+            "name": "en_US-ryan-medium",
+            "url": "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/en/en_US/ryan/medium/en_US-ryan-medium.onnx",
+            "speaker_id": null
+        }
+    },
+    "es": {
+        "male": {
+            "name": "es_ES-sharvard-medium",
+            "url": "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/es/es_ES/sharvard/medium/es_ES-sharvard-medium.onnx",
+            "speaker_id": 0
+        },
+        "female": {
+            "name": "es_ES-sharvard-medium",
+            "url": "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/es/es_ES/sharvard/medium/es_ES-sharvard-medium.onnx",
+            "speaker_id": 1
+        }
+    }
+}
