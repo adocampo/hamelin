@@ -81,6 +81,69 @@ Example entry:
 - `speaker_id` is optional; set when the model bundles multiple speakers.
 - Add more languages/voices as needed.
 
+## Available Languages & How To Specify Them
+
+Piper publishes voices for dozens of languages. The table below lists the most common language codes you can reference in `voices.json` (see the [official catalogue](https://huggingface.co/rhasspy/piper-voices/tree/v1.0.0) for the latest list and models per dialect):
+
+| Code | Language           | Example voice path                              |
+|------|--------------------|------------------------------------------------|
+| ar   | Arabic             | `ar/ar_EG/ayman/...`                           |
+| ca   | Catalan            | `ca/ca_ES/guifrem/...`                         |
+| cs   | Czech              | `cs/cs_CZ/jirka/...`                           |
+| da   | Danish             | `da/da_DK/jeppe/...`                           |
+| de   | German             | `de/de_DE/kerstin/...`                         |
+| el   | Greek              | `el/el_GR/rapunzelina/...`                     |
+| en   | English (various)  | `en/en_US/lessac/...`, `en/en_GB/cori/...`     |
+| es   | Spanish            | `es/es_ES/sharvard/...`, `es/es_MX/aldona/...` |
+| fi   | Finnish            | `fi/fi_FI/jenny/...`                           |
+| fr   | French             | `fr/fr_FR/gilles/...`                          |
+| gl   | Galician           | `gl/gl_ES/roxana/...`                          |
+| hr   | Croatian           | `hr/hr_HR/tihomir/...`                         |
+| hu   | Hungarian          | `hu/hu_HU/imre/...`                            |
+| id   | Indonesian         | `id/id_ID/izza/...`                            |
+| is   | Icelandic          | `is/is_IS/salka/...`                           |
+| it   | Italian            | `it/it_IT/riccardo/...`                        |
+| ja   | Japanese           | `ja/ja_JP/miku/...`                            |
+| ko   | Korean             | `ko/ko_KR/tomoko/...`                          |
+| lt   | Lithuanian         | `lt/lt_LT/alda/...`                            |
+| lv   | Latvian            | `lv/lv_LV/egita/...`                           |
+| nb   | Norwegian Bokmål   | `nb/nb_NO/kari/...`                            |
+| nl   | Dutch              | `nl/nl_NL/nikolaas/...`                        |
+| pl   | Polish             | `pl/pl_PL/daniel/...`                          |
+| pt   | Portuguese         | `pt/pt_PT/joana/...`                           |
+| ro   | Romanian           | `ro/ro_RO/george/...`                          |
+| ru   | Russian            | `ru/ru_RU/irinia/...`                          |
+| sk   | Slovak             | `sk/sk_SK/adam/...`                            |
+| sl   | Slovenian          | `sl/sl_SI/tatjana/...`                         |
+| sr   | Serbian            | `sr/sr_RS/vuk/...`                             |
+| sv   | Swedish            | `sv/sv_SE/anders/...`                          |
+| tr   | Turkish            | `tr/tr_TR/ahmet/...`                           |
+| uk   | Ukrainian          | `uk/uk_UA/natalia/...`                         |
+| vi   | Vietnamese         | `vi/vi_VN/son/...`                             |
+| yue  | Cantonese          | `yue/yue_HK/jyutping/...`                      |
+
+> Piper also ships additional languages (Afrikaans, Bengali, Hindi, Malayalam, Tamil, Thai, Urdu, etc.). For anything not in the table, inspect the Hugging Face tree and mirror the directory layout in your `voices.json` entry.
+
+### Selecting a Voice
+
+1. **Automatic (recommended)** – leave `--model` unset. The script reads `DC.language`, reduces it to the short code (`es`, `en`, etc.), and looks up the matching entry in `voices.json` based on the requested `--gender`.
+2. **Manual voice** – pass `--model /path/to/model.onnx`. Optionally also provide `--speaker 1` if the chosen model contains multiple speakers.
+3. **Adding languages** – edit `voices.json` and insert a new entry:
+
+   ```jsonc
+   "pt": {
+     "female": {
+       "name": "pt_PT-joana-medium",
+       "url": "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_PT/joana/medium/pt_PT-joana-medium.onnx",
+       "speaker_id": null
+     }
+   }
+   ```
+
+   After saving, run the converter again. The first execution will download the `.onnx`/`.json` pair automatically into `piper_tts/`.
+
+If an EPUB uses a language that is not present in `voices.json`, the converter falls back to English and logs a warning. Add the missing language or specify `--model` to override.
+
 ## Text Processing Details
 
 - Uses BeautifulSoup to extract readable text.
