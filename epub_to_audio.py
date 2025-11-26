@@ -20,7 +20,7 @@ def extract_text_from_html(html_content):
     # Only look inside the body tag if it exists
     root = soup.body if soup.body else soup
 
-    for element in root.find_all(text=True):
+    for element in root.find_all(string=True):
         # Skip XML declarations or processing instructions that might be captured as text
         if element.strip().startswith('xml version='):
             continue

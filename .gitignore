@@ -63,3 +63,4 @@ Thumbs.db
 # Project specific
 piper_tts/
 .github/
+output_audio/
